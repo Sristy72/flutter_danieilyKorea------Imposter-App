@@ -17,7 +17,7 @@ class DiscussionPhaseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Discussion Phase")),
+      appBar: AppBar(title: const Text("Discussion Phase", style: TextStyle(color: Colors.white),)),
       body: SafeArea(
         child: Column(
           children: [
@@ -28,9 +28,9 @@ class DiscussionPhaseScreen extends StatelessWidget {
               padding: const EdgeInsets.all(40),
               margin: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                color: AppColors.votingBackground,
+                color: AppColors.wordRevealBack1,
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(width: 2, color: AppColors.votingBorder4)
+                // border: Border.all(width: 2, color: AppColors.votingBorder4)
               ),
               child: Text(
                 question,
@@ -53,10 +53,10 @@ class DiscussionPhaseScreen extends StatelessWidget {
                   //final optionLetter = String.fromCharCode(65 + index); // A, B, C, etc.
                   return Container(
                     margin: const EdgeInsets.only(bottom: 12),
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: AppColors.votingBackground,
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(4),
                       border: Border.all(width: 1, color: AppColors.staticTextBackground)
                     ),
                     child: Row(

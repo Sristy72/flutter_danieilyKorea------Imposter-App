@@ -1,5 +1,4 @@
 import 'package:danielyikorea/core/common/constants/app_colors.dart';
-import 'package:danielyikorea/core/common/widgets/app_scaffold.dart';
 import 'package:danielyikorea/features/game_settings/controller/game_controller.dart';
 import 'package:danielyikorea/features/game_settings/controller/revealed_word_controller.dart';
 import 'package:danielyikorea/features/game_settings/data/models/game_start_response_model.dart';
@@ -29,7 +28,7 @@ class PlayersScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Players", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+        title: const Text("Players", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600)),
       ),
       body: SafeArea(
         child: Padding(
@@ -39,7 +38,7 @@ class PlayersScreen extends StatelessWidget {
             children: [
               const Text(
                 "Tap your name to reveal your word, then pass the device to the next player.",
-                style: TextStyle(fontSize: 12, color: Colors.black87),
+                style: TextStyle(fontSize: 16,  color: Colors.white),
               ),
               const SizedBox(height: 20),
 
@@ -88,7 +87,7 @@ class PlayersScreen extends StatelessWidget {
   Widget _playerCard(String name, int index) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.imageBackground1,
+        color: AppColors.wordRevealBack1,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
           color: AppColors.primaryButtonBorderColor,

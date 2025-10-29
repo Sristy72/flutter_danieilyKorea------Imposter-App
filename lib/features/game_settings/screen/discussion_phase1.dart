@@ -1,7 +1,6 @@
 import 'package:danielyikorea/features/game_settings/screen/game_setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../../../core/common/constants/app_colors.dart';
 import '../controller/game_controller.dart';
 import '../data/models/game_start_response_model.dart';
@@ -20,13 +19,14 @@ class DiscussionPhaseScreen2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          leading: BackButton(onPressed: () => Get.offAll(GameSettingsScreen()),),
-          
-          title: const Text("Discussion Phase")),
+        leading: BackButton(onPressed: () => Get.offAll(GameSettingsScreen())),
+        title: const Text("Discussion Phase"),
+      ),
       body: SafeArea(
         child: Column(
           children: [
             const SizedBox(height: 16),
+
             // Question Box
             Container(
               width: double.infinity,
@@ -40,6 +40,7 @@ class DiscussionPhaseScreen2 extends StatelessWidget {
               child: Text(
                 question,
                 textAlign: TextAlign.center,
+                softWrap: true,
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
@@ -47,9 +48,9 @@ class DiscussionPhaseScreen2 extends StatelessWidget {
                 ),
               ),
             ),
-        
+
             const SizedBox(height: 24),
-        
+
             // Player Answers as options
             Expanded(
               child: ListView.builder(
@@ -58,7 +59,7 @@ class DiscussionPhaseScreen2 extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final player = players[index];
                   final String serial = (index + 1).toString();
-                  //final optionLetter = String.fromCharCode(65 + index); // A, B, C, etc.
+
                   return Container(
                     margin: const EdgeInsets.only(bottom: 12),
                     padding: const EdgeInsets.all(16),
@@ -67,11 +68,15 @@ class DiscussionPhaseScreen2 extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
                         width: 1,
-                        color: player.isImposter? AppColors.imposterBorder : AppColors.staticTextBackground,
+                        color: player.isImposter
+                            ? AppColors.imposterBorder
+                            : AppColors.staticTextBackground,
                       ),
                     ),
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        // Serial Box
                         Container(
                           height: 40,
                           width: 40,
@@ -101,78 +106,93 @@ class DiscussionPhaseScreen2 extends StatelessWidget {
                             ),
                           ),
                         ),
+
                         const SizedBox(width: 12),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            player.isImposter?
-                            Row(
-                              children: [
-                                Text(
-                                  player.name,
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.w400,
-                                    color:  AppColors.imposterSerial,
-                                  ),
-                                ),
-                                SizedBox(width: 10,),
-        
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: AppColors.imposterSerialBack
-                                  ),
-        
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 8),
-                                    child: Text('Imposter', style: TextStyle(color:AppColors.imposterSerial,),),
-                                  ),
-                                )
-                              ],
-                            ) : Text(
-                              player.name,
-                              style: TextStyle(
-                                fontSize: 19,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white,
-                              ),
-                            ),
-        
-                            player.isImposter ?
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
-                                  child: Text(player.answer.isEmpty ? "No answer" : player.answer,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
+
+                        // Text Section (FIXED with Expanded)
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              player.isImposter
+                                  ? Row(
+                                children: [
+                                  Text(
+                                    player.name,
+                                    style: TextStyle(
+                                      fontSize: 19,
+                                      fontWeight: FontWeight.w400,
+                                      color: AppColors.imposterSerial,
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 18.0),
-                                  child: Container(
+                                  const SizedBox(width: 10),
+                                  Container(
                                     decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(20),
                                       color: AppColors.imposterSerialBack,
-                                      border: Border.all(width: 1, color: AppColors.imposterSerialBorder), borderRadius: BorderRadius.circular(6)
                                     ),
-                                      child: Padding(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 3, horizontal: 8),
+                                      child: Text(
+                                        'Imposter',
+                                        style: TextStyle(
+                                            color:
+                                            AppColors.imposterSerial),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
+                                  : Text(
+                                player.name,
+                                style: const TextStyle(
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.white,
+                                ),
+                              ),
+
+                              const SizedBox(height: 8),
+
+                              Text(
+                                player.answer.isEmpty
+                                    ? "No answer"
+                                    : player.answer,
+                                softWrap: true,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
+
+                              if (player.isImposter) ...[
+                                const SizedBox(height: 18),
+                                Container(
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.imposterSerialBack,
+                                    borderRadius: BorderRadius.circular(6),
+                                    border: Border.all(
+                                      width: 1,
+                                      color: AppColors.imposterSerialBorder,
+                                    ),
+                                  ),
+                                  child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text(player.questions, style: TextStyle(color: Colors.white, ),),
-                                  )),
+                                    child: Text(
+                                      player.questions,
+                                      softWrap: true,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ],
-                            )
-                                : Text(player.answer.isEmpty ? "No answer" : player.answer,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -180,7 +200,7 @@ class DiscussionPhaseScreen2 extends StatelessWidget {
                 },
               ),
             ),
-        
+
             // Start Round / Find Imposter Button
             Padding(
               padding: const EdgeInsets.all(16.0),
@@ -210,7 +230,7 @@ class DiscussionPhaseScreen2 extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),

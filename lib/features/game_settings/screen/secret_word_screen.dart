@@ -70,10 +70,10 @@ class SecretWordScreen extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 60),
+              const SizedBox(height: 160),
 
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Container(
                   height: 50,
                   width: double.infinity,
