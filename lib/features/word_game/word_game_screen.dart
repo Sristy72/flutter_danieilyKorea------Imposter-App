@@ -20,81 +20,86 @@ class _WordGameScreenState extends State<WordGameScreen> {
   Widget build(BuildContext context) {
     return AppScaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: Image.asset(AppImages.appLogo, height: 130, width: 130),
-              ),
-          
-              SizedBox(height: 24),
-              Text(
-                'Word Game',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
-              ),
-          
-              SizedBox(height: 8),
-              Text(
-                'A game with many hidden clues',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-              ),
-          
-              SizedBox(height: 110),
-              Container(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Get.to(() => GameSettingsScreen());
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryButtonColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4), // Rounded corners
+        child: Center(
+          child: SingleChildScrollView(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Image.asset(AppImages.logWhite, height: 130, width: 130),
+                  ),
+
+                  SizedBox(height: 24),
+                  Text(
+                    'Word Game',
+                    style: TextStyle(color: Colors.white,fontSize: 24, fontWeight: FontWeight.w700),
+                  ),
+
+                  SizedBox(height: 8),
+                  Text(
+                    'A game with many hidden clues',
+                    style: TextStyle(color: Colors.white,fontSize: 18, fontWeight: FontWeight.w500),
+                  ),
+
+                  SizedBox(height: 110),
+                  Container(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Get.to(() => GameSettingsScreen());
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primaryButtonColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4), // Rounded corners
+                        ),
+                      ),
+                      child: Text(
+                        'Get Started',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
                     ),
                   ),
-                  child: Text(
-                    'Get Started',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
+
+
+                  SizedBox(height: 12,),
+                  Container(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () {Get.to(() => HowToPlayScreen());},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        side: const BorderSide(
+                          color: AppColors.primaryButtonBorderColor, // Border color
+                          width: 1,           // Border width
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4), // Rounded corners
+                        ),
+                      ),
+                      child: Text(
+                        'How to play',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+
+                  Gap.bottomBarGap
+                ],
               ),
-          
-          
-              SizedBox(height: 12,),
-              Container(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {Get.to(() => HowToPlayScreen());},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    side: const BorderSide(
-                      color: AppColors.primaryButtonBorderColor, // Border color
-                      width: 1,           // Border width
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4), // Rounded corners
-                    ),
-                  ),
-                  child: Text(
-                    'How to play',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
-              ),
-        
-              Gap.bottomBarGap
-            ],
+            ),
           ),
         ),
       ),

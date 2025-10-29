@@ -30,7 +30,7 @@ class GameSettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
+    //final screenHeight = MediaQuery.of(context).size.height;
     final cardWidth = (screenWidth - 48) / 2; // 16 padding + 16 spacing
 
     return Scaffold(
@@ -41,10 +41,13 @@ class GameSettingsScreen extends StatelessWidget {
         leading: const BackButton(),
         actions: [
           IconButton(
-            icon: SizedBox(
-              height: 30,
-              width: 30,
-              child: Image.asset(AppImages.settings),
+            icon: Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: SizedBox(
+                height: 30,
+                width: 30,
+                child: Image.asset(AppImages.settings),
+              ),
             ),
             onPressed: () {
               Get.to(() => SettingsScreen());
@@ -61,7 +64,7 @@ class GameSettingsScreen extends StatelessWidget {
               const SizedBox(height: 8),
               const Text(
                 'Game Settings',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
               ),
               const SizedBox(height: 24),
 
@@ -103,7 +106,7 @@ class GameSettingsScreen extends StatelessWidget {
                   const SizedBox(width: 8),
                   const Text(
                     'Game Mode',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                 ],
               ),
@@ -120,6 +123,7 @@ class GameSettingsScreen extends StatelessWidget {
                         'Find who doesn’t know the secret word',
                         controller.isWordGame.value,
                         AppImages.word,
+                        AppImages.word2,
                         cardWidth,
                       ),
                     )),
@@ -133,6 +137,7 @@ class GameSettingsScreen extends StatelessWidget {
                         'Find who got a different question',
                         !controller.isWordGame.value,
                         AppImages.question,
+                        AppImages.question1,
                         cardWidth,
                       ),
                     )),
@@ -194,15 +199,10 @@ class GameSettingsScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 24),
         width: cardWidth,
         decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 2,
-              blurRadius: 3,
-              offset: const Offset(0, 2),
-            ),
-          ],
+          color: AppColors.staticTextBackground,
+          border: Border.all(
+            width: 1, color: AppColors.imageBackground1
+          ),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
@@ -234,13 +234,13 @@ class GameSettingsScreen extends StatelessWidget {
   }
 
   Widget _gameModeCard(
-      String title, String subtitle, bool isSelected, String image, double cardWidth) {
+      String title, String subtitle, bool isSelected, String image1, String image2, double cardWidth) {
     return Container(
       width: cardWidth,
       height: 160,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isSelected ? AppColors.imageBackground1 : Colors.white,
+        color: isSelected ? AppColors.imageBackground1 : Colors.transparent,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
             color: isSelected
@@ -250,22 +250,22 @@ class GameSettingsScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SizedBox(height: 35, width: 35, child: Image.asset(image)),
-          const SizedBox(height: 12),
+          SizedBox(height: 35, width: 35,child: isSelected?  Image.asset(image1) : Image.asset(image2), ),
+          SizedBox(height: 12),
           Text(
             title,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: isSelected
                   ? AppColors.primaryButtonBorderColor
-                  : AppColors.black,
+                  : AppColors.white,
             ),
           ),
           const SizedBox(height: 4),
           Text(
             subtitle,
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 12, color: AppColors.black),
+            style: TextStyle(fontSize: 12, color: isSelected ? AppColors.black : AppColors.white),
           ),
         ],
       ),
