@@ -39,7 +39,7 @@ class AddPlayerScreen extends StatelessWidget {
             },
           ),
           centerTitle: true,
-          title: const Text('Player Names'),
+          title: const Text('Player Names', style: TextStyle(color:Colors.white),),
         ),
 
         bottomNavigationBar: ClipRRect(
@@ -59,6 +59,7 @@ class AddPlayerScreen extends StatelessWidget {
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
                         border: Border.all(
                           width: 1,
                           color: AppColors.border1,
@@ -71,12 +72,12 @@ class AddPlayerScreen extends StatelessWidget {
                           return ElevatedButton.icon(
                             onPressed: isRemovable ? controller.removeLastPlayer : null,
                             icon: SizedBox(height: 20, width: 20, child: Image.asset(AppImages.removePlayer)),
-                            label: const Text('Remove'),
+                            label:  Text('Remove', style: isRemovable ? TextStyle(color: Colors.black):  TextStyle(color: Colors.grey),),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: isRemovable ? Colors.transparent : Colors.grey.shade700,
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(6),
                               ),
                               elevation: 0,
                             ),
@@ -89,7 +90,7 @@ class AddPlayerScreen extends StatelessWidget {
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(6),
                         border: Border.all(
                           width: 1,
                           color: AppColors.border,
@@ -100,7 +101,7 @@ class AddPlayerScreen extends StatelessWidget {
                         child: ElevatedButton.icon(
                           onPressed: controller.addPlayer,
                           icon: Container(height: 20, width: 20, child: Image.asset(AppImages.addPlayer)),
-                          label: const Text('Add'),
+                          label: const Text('Add', style: TextStyle(color: AppColors.border),),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.transparent,
                             foregroundColor: Colors.white,
@@ -130,7 +131,7 @@ class AddPlayerScreen extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                     decoration: BoxDecoration(
-                      color: AppColors.imageBackground1,
+                      color: AppColors.background,
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
                         color: AppColors.staticTextBackground
