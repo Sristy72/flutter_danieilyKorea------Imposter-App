@@ -1,5 +1,6 @@
 class AppImages {
   static const String appLogo = 'assets/images/token_wagmigames.png';
+  static const String logWhite = 'assets/images/logo_white.png';
   static const String appLogoLandscape = 'assets/images/app_logo_landscape.png';
   static const String googleLogo = 'assets/images/google_logo.png';
   static const String entireScreen = 'assets/images/EntireScreenlogo.png';
@@ -11,13 +12,15 @@ class AppImages {
   static const String findTheImposter = 'assets/images/find_the_imposter.png';
   static const String proTips = 'assets/images/tips.png';
 
-  static const String settings = 'assets/images/settings.png';
+  static const String settings = 'assets/images/setting.png';
   static const String playersSearch = 'assets/images/players_search.png';
   static const String impostersSearch = 'assets/images/imposters_search.png';
-  static const String gameMode = 'assets/images/mode.png';
+  static const String gameMode = 'assets/images/gamemode.png';
   static const String word = 'assets/images/word.png';
+  static const String word2 = 'assets/images/word2.png';
   static const String question = 'assets/images/question.png';
-  static const String categories = 'assets/images/categories.png';
+  static const String question1 = 'assets/images/question1.png';
+  static const String categories = 'assets/images/question1.png';
   static const String pro = 'assets/images/pro.png';
   static const String lock = 'assets/images/lock.png';
   static const String arrow = 'assets/images/arrow.png';

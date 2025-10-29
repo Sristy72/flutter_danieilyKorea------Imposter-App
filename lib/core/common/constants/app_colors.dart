@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class AppColors{
@@ -6,17 +5,19 @@ class AppColors{
   static const Color splashScreenColor2= Color(0xFFC7855D);
   static const Color primaryButtonColor = Color(0xFF630FBE);
   static const  Color primaryButtonBorderColor = Color(0xFF6E82FF);
+  // static const  Color primaryButtonBorderColor = Color(0xFF6E82FF);
   static const Color primaryGreen = Color(0xFF2AAF08);
   static const Color primaryBackground = Color(0xFF080808);
   static const Color border = Color(0xFFAA60FA);
   static const Color border1 = Color(0xFF656565);
   static const Color imageBackground = Color(0xFF693BA0);
+  static const Color imageBackground2 = Color(0xFF1D1753);
   static const Color imageBackground1 = Color(0xFFF2F3FF);
   static const Color staticTextBackground = Color(0xFFDEE2FF);
   static const Color tipsBackground = Color(0xFF341B63);
 
   static const Color votingBackground = Color(0xFF19153F);
-  static const Color playerChoose = Color(0xFF09166E);
+  // static const Color  = Color(0xFF09166E);
   static const Color votingBorder1 = Color(0xFF54CDE8);
   static const Color votingBorder4 = Color(0xFFA959FF);
 
@@ -37,7 +38,10 @@ class AppColors{
   static const Color hintStyle = Color(0xFF8B8B8B);
 
   static const Color settingBack = Color(0xFF573E87);
-
+  static const Color playerChoose = Color(0xFF1D1753);
+  static const Color background = Color(0xFFF2F3FF);
+  static const Color imageBorder = Color(0xFF5C5C5C);
+  static const Color imageBorder1 = Color(0xFF960000);
 
 
   static const Color tipsBackground1 = Color(0xFF733CA3);
@@ -47,7 +51,9 @@ class AppColors{
   static const Color proBackground1 = Color(0xFFFFAD79);
   static const Color elevatedButton1 = Color(0xFF2034BC);
   static const Color elevatedButton2 = Color(0xFF08166D);
+  static const Color elevatedButton3 = Color(0xFF381274);
   static const Color wordRevealBack = Color(0xFF091E45);
+  static const Color wordRevealBack1 = Color(0xFF1D1753);
   static const Color black = Color(0xFF000000);
   static const Color black1 = Color(0xFF332C3B);
   static const Color red = Color(0xFFFF0000);
