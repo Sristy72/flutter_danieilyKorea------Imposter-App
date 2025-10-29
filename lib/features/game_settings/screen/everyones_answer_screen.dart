@@ -26,7 +26,7 @@ class _EveryonesAnswerScreenState extends State<EveryonesAnswerScreen> {
   Widget build(BuildContext context) {
     return AppScaffold(
       appBar: AppBar(
-        title: Text('Everyone’s Answers'),
+        title: Text('Everyone’s Answers', style: TextStyle(color: Colors.white),),
       ),
       body: SafeArea(
         child: Center(
@@ -38,8 +38,8 @@ class _EveryonesAnswerScreenState extends State<EveryonesAnswerScreen> {
                   height: 190,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: AppColors.wordRevealBack,
-                    borderRadius: BorderRadius.circular(12),
+                    color: AppColors.wordRevealBack1,
+                    borderRadius: BorderRadius.circular(4),
                     border: Border.all(
                       color: AppColors.votingBorder4,
                       width: 2,
@@ -68,6 +68,7 @@ class _EveryonesAnswerScreenState extends State<EveryonesAnswerScreen> {
                   'This is the question. Soon you will see all answers and then discuss who is lying about their answer.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
+                    color: Colors.white,
                     fontSize: 18,
                     fontWeight: FontWeight.w300,
                   ),

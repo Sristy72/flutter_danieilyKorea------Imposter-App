@@ -68,7 +68,7 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                 text: TextSpan(
                   text: "The question for ",
                   style: const TextStyle(
-                    color: AppColors.black,
+                    color: AppColors.white,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -89,7 +89,7 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                 "Category: ${widget.category}",
                 style: const TextStyle(
                   fontSize: 14,
-                  color: AppColors.black,
+                  color: AppColors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -112,7 +112,7 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                           height: 190,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: AppColors.wordRevealBack,
+                            color: AppColors.wordRevealBack1,
                             borderRadius: BorderRadius.circular(4),
                             border: Border.all(
                               color: AppColors.votingBorder4,
@@ -135,7 +135,11 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                           height: 190,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: AppColors.wordRevealBack,
+                            color: AppColors.wordRevealBack1,
+                            border: Border.all(
+                              width:2,
+                              color: AppColors.elevatedButton3
+                            ),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Column(
@@ -274,6 +278,7 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                               children: [
                                 Container(
                                   decoration: BoxDecoration(
+                                    color: AppColors.wordRevealBack1,
                                     border: Border.all(
                                       color: AppColors.primaryButtonColor,
                                     ),
@@ -291,7 +296,7 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                                       hintStyle: TextStyle(
                                         color: AppColors.hintStyle,
                                       ),
-                                      fillColor: AppColors.wordRevealBack,
+                                      fillColor: AppColors.wordRevealBack1,
                                       filled: true,
                                     ),
                                   ),

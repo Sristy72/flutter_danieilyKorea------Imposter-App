@@ -11,7 +11,9 @@ class HowToPlayScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      appBar: AppBar(title: const Text("How to play"), centerTitle: true),
+      appBar: AppBar(title: const Text("How to play", style: TextStyle(
+        color: Colors.white
+      ),), centerTitle: true),
       body: SafeArea(
         child: ListView(
           children: [
@@ -40,7 +42,7 @@ class HowToPlayScreen extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: AppColors.staticTextBackground,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Padding(
         padding: const EdgeInsets.only(

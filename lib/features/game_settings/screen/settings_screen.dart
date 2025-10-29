@@ -17,7 +17,7 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Settings',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
         ),
       ),
       body: SingleChildScrollView(
@@ -74,7 +74,7 @@ class SettingsScreen extends StatelessWidget {
     return Container(
       //height: 100,
       decoration: BoxDecoration(
-        color: AppColors.votingBackground,
+        color: AppColors.wordRevealBack1,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(

@@ -43,7 +43,7 @@ class _WordRevealScreenState extends State<WordRevealScreen> {
                 text: TextSpan(
                   text: "The word for ",
                   style: const TextStyle(
-                    color: AppColors.black,
+                    color: Colors.white,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -64,7 +64,7 @@ class _WordRevealScreenState extends State<WordRevealScreen> {
                 "Category: ${widget.category}",
                 style: const TextStyle(
                   fontSize: 14,
-                  color: AppColors.black,
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -111,6 +111,9 @@ class _WordRevealScreenState extends State<WordRevealScreen> {
                           height: 160,
                           width: double.infinity,
                           decoration: BoxDecoration(
+                            border: Border.all(
+                              width:1, color: AppColors.imageBorder
+                            ),
                             // color: Colors.black,
                             image: const DecorationImage(
                               image: AssetImage(
@@ -137,7 +140,7 @@ class _WordRevealScreenState extends State<WordRevealScreen> {
                     decoration: BoxDecoration(
                       color: AppColors.wordRevealBack,
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.blue, width: 1.5),
+                      border: Border.all(color: AppColors.imageBorder1, width: 1.5),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,

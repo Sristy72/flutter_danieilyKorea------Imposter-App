@@ -27,21 +27,21 @@ class VotingPhaseScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
-                  color: AppColors.black,
+                  color: AppColors.white,
                 ),
               ),
           
               /// Header
               const Text(
                 "Time to discuss and vote for the imposter!",
-                style: TextStyle(fontSize: 14, color: Colors.black),
+                style: TextStyle(fontSize: 14, color: Colors.white),
               ),
               const SizedBox(height: 20),
           
               /// Section title
               const Text(
                 "How to vote",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
               ),
               const SizedBox(height: 16),
           
