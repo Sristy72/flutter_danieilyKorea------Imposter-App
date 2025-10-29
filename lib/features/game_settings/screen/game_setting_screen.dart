@@ -14,7 +14,7 @@ class GameSettingsScreen extends StatelessWidget {
 
   Future<void> _openPickPlayers() async {
     final result = await Get.to(
-          () => AddPlayerScreen(initialPlayers: controller.playerNames),
+      () => AddPlayerScreen(initialPlayers: controller.playerNames),
     );
 
     if (result != null && result is List<String>) {
@@ -30,7 +30,6 @@ class GameSettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    //final screenHeight = MediaQuery.of(context).size.height;
     final cardWidth = (screenWidth - 48) / 2; // 16 padding + 16 spacing
 
     return Scaffold(
@@ -49,159 +48,188 @@ class GameSettingsScreen extends StatelessWidget {
                 child: Image.asset(AppImages.settings),
               ),
             ),
-            onPressed: () {
-              Get.to(() => SettingsScreen());
-            },
+            onPressed: () => Get.to(() => SettingsScreen()),
           ),
         ],
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 8),
-              const Text(
-                'Game Settings',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-              ),
-              const SizedBox(height: 24),
-
-              // Number cards row
-              Row(
-                children: [
-                  Expanded(
-                    child: Obx(() => _numberCard(
-                      'Total players?',
-                      controller.totalPlayers.value,
-                      AppImages.playersSearch,
-                      _openPickPlayers,
-                      cardWidth,
-                    )),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Obx(() => _numberCard(
-                      'Total imposters?',
-                      controller.totalImposters.value,
-                      AppImages.impostersSearch,
-                      null,
-                      cardWidth,
-                    )),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 32),
-
-              // Game Mode title
-              Row(
-                children: [
-                  SizedBox(
-                    height: 24,
-                    width: 30,
-                    child: Image.asset(AppImages.gameMode),
-                  ),
-                  const SizedBox(width: 8),
-                  const Text(
-                    'Game Mode',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-
-              // Game Mode cards row
-              Row(
-                children: [
-                  Expanded(
-                    child: Obx(() => GestureDetector(
-                      onTap: () => controller.toggleGameMode(true),
-                      child: _gameModeCard(
-                        'Word Game',
-                        'Find who doesn’t know the secret word',
-                        controller.isWordGame.value,
-                        AppImages.word,
-                        AppImages.word2,
-                        cardWidth,
+        child: Column(
+          children: [
+            // ────── SCROLLABLE CONTENT ──────
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 8),
+                    const Text(
+                      'Game Settings',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
-                    )),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Obx(() => GestureDetector(
-                      onTap: () => controller.toggleGameMode(false),
-                      child: _gameModeCard(
-                        'Question Game',
-                        'Find who got a different question',
-                        !controller.isWordGame.value,
-                        AppImages.question,
-                        AppImages.question1,
-                        cardWidth,
-                      ),
-                    )),
-                  ),
-                ],
+                    ),
+                    const SizedBox(height: 24),
+
+                    // ---------- Number cards ----------
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Obx(
+                            () => _numberCard(
+                              'Total players?',
+                              controller.totalPlayers.value,
+                              AppImages.playersSearch,
+                              _openPickPlayers,
+                              cardWidth,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Obx(
+                            () => _numberCard(
+                              'Total imposters?',
+                              controller.totalImposters.value,
+                              AppImages.impostersSearch,
+                              null,
+                              cardWidth,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 32),
+
+                    // ---------- Game Mode ----------
+                    Row(
+                      children: [
+                        SizedBox(
+                          height: 24,
+                          width: 30,
+                          child: Image.asset(AppImages.gameMode),
+                        ),
+                        const SizedBox(width: 8),
+                        const Text(
+                          'Game Mode',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Obx(
+                            () => GestureDetector(
+                              onTap: () => controller.toggleGameMode(true),
+                              child: _gameModeCard(
+                                'Word Game',
+                                'Find who doesn’t know the secret word',
+                                controller.isWordGame.value,
+                                AppImages.word,
+                                AppImages.word2,
+                                cardWidth,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Obx(
+                            () => GestureDetector(
+                              onTap: () => controller.toggleGameMode(false),
+                              child: _gameModeCard(
+                                'Question Game',
+                                'Find who got a different question',
+                                !controller.isWordGame.value,
+                                AppImages.question,
+                                AppImages.question1,
+                                cardWidth,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(
+                      height: 80,
+                    ), // extra space before sticky button
+                  ],
+                ),
               ),
+            ),
 
-              const SizedBox(height: 32),
-
-              // Start Game button
-              SizedBox(
-                width: double.infinity,
+            // ────── STICKY BOTTOM BUTTON ──────
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+              child: SizedBox(
                 height: 50,
                 child: ElevatedButton(
                   onPressed: _submit,
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                     padding: EdgeInsets.zero,
                     backgroundColor: Colors.transparent,
                     shadowColor: Colors.transparent,
                   ),
                   child: Container(
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          AppColors.elevatedButton1,
-                          AppColors.elevatedButton2
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFF41194F), Color(0xFF271231)],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
                       ),
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                     alignment: Alignment.center,
                     child: const Text(
                       'Start Game',
                       style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
               ),
-              Gap.bottomBarGap,
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget _numberCard(String title, int number, String image,
-      VoidCallback? onTap, double cardWidth) {
+  Widget _numberCard(
+    String title,
+    int number,
+    String image,
+    VoidCallback? onTap,
+    double cardWidth,
+  ) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 24),
         width: cardWidth,
         decoration: BoxDecoration(
-          color: AppColors.staticTextBackground,
+          color: AppColors.gameSettingBackground2,
           border: Border.all(
-            width: 1, color: AppColors.imageBackground1
+            width: 1,
+            color: AppColors.gameSettingDiselectBorder,
           ),
           borderRadius: BorderRadius.circular(8),
         ),
@@ -209,11 +237,16 @@ class GameSettingsScreen extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                  color: AppColors.imageBackground1,
-                  borderRadius: BorderRadius.circular(8)),
+                color: AppColors.gameIconBg,
+                borderRadius: BorderRadius.circular(8),
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: SizedBox(height: 20, width: 20, child: Image.asset(image)),
+                child: SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: Image.asset(image),
+                ),
               ),
             ),
             const SizedBox(height: 12),
@@ -221,12 +254,20 @@ class GameSettingsScreen extends StatelessWidget {
               title,
               textAlign: TextAlign.center,
               style: const TextStyle(
-                  fontSize: 14, color: AppColors.black, fontWeight: FontWeight.w400),
+                fontSize: 14,
+                color: AppColors.white,
+                fontWeight: FontWeight.w400,
+              ),
             ),
             const SizedBox(height: 8),
-            Text('$number',
-                style:
-                const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            Text(
+              '$number',
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: AppColors.white,
+              ),
+            ),
           ],
         ),
       ),
@@ -234,38 +275,49 @@ class GameSettingsScreen extends StatelessWidget {
   }
 
   Widget _gameModeCard(
-      String title, String subtitle, bool isSelected, String image1, String image2, double cardWidth) {
+    String title,
+    String subtitle,
+    bool isSelected,
+    String image1,
+    String image2,
+    double cardWidth,
+  ) {
     return Container(
       width: cardWidth,
       height: 160,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isSelected ? AppColors.imageBackground1 : Colors.transparent,
+        color: isSelected
+            ? AppColors.gameSettingBackground1
+            : AppColors.gameSettingBackground2,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-            color: isSelected
-                ? AppColors.primaryButtonBorderColor
-                : Colors.grey[300]!,
-            width: isSelected ? 2 : 1),
+          color: isSelected
+              ? AppColors.border
+              : AppColors.gameSettingDiselectBorder,
+          width: isSelected ? 2 : 1,
+        ),
       ),
       child: Column(
         children: [
-          SizedBox(height: 35, width: 35,child: isSelected?  Image.asset(image1) : Image.asset(image2), ),
+          SizedBox(
+            height: 35,
+            width: 35,
+            child: isSelected ? Image.asset(image1) : Image.asset(image2),
+          ),
           SizedBox(height: 12),
           Text(
             title,
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: isSelected
-                  ? AppColors.primaryButtonBorderColor
-                  : AppColors.white,
+              color: isSelected ? AppColors.border : AppColors.white,
             ),
           ),
           const SizedBox(height: 4),
           Text(
             subtitle,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 12, color: isSelected ? AppColors.black : AppColors.white),
+            style: TextStyle(fontSize: 12, color: AppColors.white),
           ),
         ],
       ),

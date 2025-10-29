@@ -6,14 +6,14 @@ import 'app_colors.dart';
 
 class AppTheme {
   static ThemeData get light => ThemeData(
-    scaffoldBackgroundColor: AppColors.votingBackground,
-    primaryColor: AppColors.votingBackground,
+    scaffoldBackgroundColor: AppColors.primaryBackground,
+    primaryColor: AppColors.primaryBackground,
     colorScheme: ColorScheme.light(primary: AppColors.primaryBackground),
 
     textTheme: GoogleFonts.poppinsTextTheme(),
     appBarTheme: AppBarTheme(
       iconTheme: IconThemeData(color: Colors.white),
-      backgroundColor: AppColors.votingBackground,
+      backgroundColor: AppColors.primaryBackground,
       titleTextStyle: TextStyle(
         fontSize: 24,
         color: Colors.black,

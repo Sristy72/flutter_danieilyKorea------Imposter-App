@@ -7,7 +7,7 @@ import '../../../core/common/constants/app_colors.dart';
 
 class AddPlayerScreen extends StatelessWidget {
   final List<String>? initialPlayers;
-  AddPlayerScreen({Key? key, this.initialPlayers}) : super(key: key);
+  const AddPlayerScreen({super.key, this.initialPlayers});
 
   final Color darkBlue = const Color(0xFF07124A);
   final Color topInfoBg = const Color(0xFFF4F6FB);
@@ -39,7 +39,10 @@ class AddPlayerScreen extends StatelessWidget {
             },
           ),
           centerTitle: true,
-          title: const Text('Player Names', style: TextStyle(color:Colors.white),),
+          title: const Text(
+            'Player Names',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
 
         bottomNavigationBar: ClipRRect(
@@ -48,33 +51,46 @@ class AddPlayerScreen extends StatelessWidget {
             topRight: Radius.circular(8),
           ),
           child: BottomAppBar(
-            color: AppColors.black1,
+            color: AppColors.playerContainerBg,
             child: Container(
               height: 64,
-              decoration: BoxDecoration(
-                color: AppColors.black1,
-              ),
+              decoration: BoxDecoration(color: AppColors.playerContainerBg),
               child: Row(
                 children: [
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6),
-                        border: Border.all(
-                          width: 1,
-                          color: AppColors.border1,
-                        ),
+                        border: Border.all(width: 1, color: AppColors.border1),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 8.0, right: 6.0, top: 8, bottom: 8),
+                        padding: const EdgeInsets.only(
+                          left: 8.0,
+                          right: 6.0,
+                          top: 8,
+                          bottom: 8,
+                        ),
                         child: Obx(() {
                           final isRemovable = controller.players.length > 3;
                           return ElevatedButton.icon(
-                            onPressed: isRemovable ? controller.removeLastPlayer : null,
-                            icon: SizedBox(height: 20, width: 20, child: Image.asset(AppImages.removePlayer)),
-                            label:  Text('Remove', style: isRemovable ? TextStyle(color: Colors.black):  TextStyle(color: Colors.grey),),
+                            onPressed: isRemovable
+                                ? controller.removeLastPlayer
+                                : null,
+                            icon: SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: Image.asset(AppImages.removePlayer),
+                            ),
+                            label: Text(
+                              'Remove',
+                              style: isRemovable
+                                  ? TextStyle(color: Colors.black)
+                                  : TextStyle(color: Colors.grey),
+                            ),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: isRemovable ? Colors.transparent : Colors.grey.shade700,
+                              backgroundColor: isRemovable
+                                  ? Colors.transparent
+                                  : Colors.grey.shade700,
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(6),
@@ -82,7 +98,7 @@ class AddPlayerScreen extends StatelessWidget {
                               elevation: 0,
                             ),
                           );
-                        })
+                        }),
                       ),
                     ),
                   ),
@@ -91,17 +107,26 @@ class AddPlayerScreen extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6),
-                        border: Border.all(
-                          width: 1,
-                          color: AppColors.border,
-                        ),
+                        border: Border.all(width: 1, color: AppColors.border),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 6.0, right: 8.0, top: 8, bottom: 8),
+                        padding: const EdgeInsets.only(
+                          left: 6.0,
+                          right: 8.0,
+                          top: 8,
+                          bottom: 8,
+                        ),
                         child: ElevatedButton.icon(
                           onPressed: controller.addPlayer,
-                          icon: Container(height: 20, width: 20, child: Image.asset(AppImages.addPlayer)),
-                          label: const Text('Add', style: TextStyle(color: AppColors.border),),
+                          icon: Container(
+                            height: 20,
+                            width: 20,
+                            child: Image.asset(AppImages.addPlayer),
+                          ),
+                          label: const Text(
+                            'Add',
+                            style: TextStyle(color: AppColors.border),
+                          ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.transparent,
                             foregroundColor: Colors.white,
@@ -123,19 +148,25 @@ class AddPlayerScreen extends StatelessWidget {
           onTap: () => FocusScope.of(context).unfocus(),
           child: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 12,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Top info card
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 10,
+                    ),
                     decoration: BoxDecoration(
-                      color: AppColors.background,
+                      color: AppColors.playerContainerBg,
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                        color: AppColors.staticTextBackground
-                      )
+                        color: AppColors.gameSettingDiselectBorder,
+                      ),
                     ),
                     child: Obx(() {
                       return Row(
@@ -148,9 +179,12 @@ class AddPlayerScreen extends StatelessWidget {
                                   width: 28,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(6),
-                                    color: Colors.white,
+                                    color: AppColors.playerIconBg,
                                   ),
-                                  child: Image.asset(AppImages.player),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(6.0),
+                                    child: Image.asset(AppImages.player),
+                                  ),
                                 ),
                                 const SizedBox(width: 10),
                                 Text(
@@ -158,6 +192,7 @@ class AddPlayerScreen extends StatelessWidget {
                                   style: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
+                                    color: AppColors.white,
                                   ),
                                 ),
                               ],
@@ -165,8 +200,12 @@ class AddPlayerScreen extends StatelessWidget {
                           ),
                           Text(
                             '${AddPlayerController.minPlayers}–${AddPlayerController.maxPlayers}',
-                            style: TextStyle(fontSize: 13, color: Colors.grey[700]),
-                          )
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: AppColors.white,
+                              // color: Colors.grey[700],
+                            ),
+                          ),
                         ],
                       );
                     }),
@@ -179,25 +218,36 @@ class AddPlayerScreen extends StatelessWidget {
                     child: SingleChildScrollView(
                       child: Obx(() {
                         return Column(
-                          children: List.generate(controller.players.length, (i) {
-                            final isEditing = controller.editingIndex.value == i;
+                          children: List.generate(controller.players.length, (
+                            i,
+                          ) {
+                            final isEditing =
+                                controller.editingIndex.value == i;
                             return Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 8.0,
+                              ),
                               child: InkWell(
                                 onTap: () {
                                   controller.startEditing(i);
 
                                   // give a micro delay so the TextField is built and autofocus works.
-                                  Future.delayed(const Duration(milliseconds: 50), () {
-                                    // nothing else required; controller provides autofocus in widget
-                                  });
+                                  Future.delayed(
+                                    const Duration(milliseconds: 50),
+                                    () {
+                                      // nothing else required; controller provides autofocus in widget
+                                    },
+                                  );
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: AppColors.playerChoose,
+                                    color: AppColors.playerContainerBg,
                                     borderRadius: BorderRadius.circular(4),
                                   ),
-                                  padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 14,
+                                    horizontal: 12,
+                                  ),
                                   child: Row(
                                     children: [
                                       Container(
@@ -205,14 +255,25 @@ class AddPlayerScreen extends StatelessWidget {
                                         width: 36,
                                         decoration: BoxDecoration(
                                           color: leftBoxColor,
-                                          borderRadius: BorderRadius.circular(4),
+                                          borderRadius: BorderRadius.circular(
+                                            4,
+                                          ),
+                                          gradient: LinearGradient(
+                                            colors: [
+                                              Color(0xFF3F2566),
+                                              Color(0xFF2D1F4D),
+                                            ],
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.bottomRight,
+                                          ),
                                         ),
                                         alignment: Alignment.center,
                                         child: Text(
                                           '${i + 1}',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: leftBoxTextColor),
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.white,
+                                          ),
                                         ),
                                       ),
                                       const SizedBox(width: 12),
@@ -220,17 +281,18 @@ class AddPlayerScreen extends StatelessWidget {
                                         child: isEditing
                                             ? _buildEditingField(i, controller)
                                             : Text(
-                                          controller.players[i],
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
+                                                "Player ${controller.players[i]}",
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
                                       ),
                                       if (isEditing)
                                         IconButton(
-                                          onPressed: () => controller.saveEditing(i),
+                                          onPressed: () =>
+                                              controller.saveEditing(i),
                                           icon: Icon(
                                             Icons.check_circle,
                                             color: proColor,
@@ -270,7 +332,11 @@ class AddPlayerScreen extends StatelessWidget {
         autofocus: true,
         textInputAction: TextInputAction.done,
         onSubmitted: (_) => controller.saveEditing(index),
-        style: const TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w500),
+        style: const TextStyle(
+          fontSize: 16,
+          color: Colors.white,
+          fontWeight: FontWeight.w500,
+        ),
         decoration: const InputDecoration(
           isDense: true,
           contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),

@@ -11,9 +11,10 @@ class HowToPlayScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      appBar: AppBar(title: const Text("How to play", style: TextStyle(
-        color: Colors.white
-      ),), centerTitle: true),
+      appBar: AppBar(
+        title: const Text("How to play", style: TextStyle(color: Colors.white)),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: ListView(
           children: [
@@ -29,7 +30,7 @@ class HowToPlayScreen extends StatelessWidget {
             const SizedBox(height: 20),
             _proTipsCard(),
 
-            SizedBox(height: 20,)
+            SizedBox(height: 20),
           ],
         ),
       ),
@@ -39,9 +40,9 @@ class HowToPlayScreen extends StatelessWidget {
   Widget _stepCard(HowToPlayModel item) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.all(16),
+      // padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.staticTextBackground,
+        color: AppColors.howToPlayTextBackground,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Padding(
@@ -52,19 +53,19 @@ class HowToPlayScreen extends StatelessWidget {
           right: 20,
         ),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Image section
             Container(
               decoration: BoxDecoration(
-                color: AppColors.imageBackground,
+                color: AppColors.howToPlayIconBackground,
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: SizedBox(width: 30, height: 30, child: item.image),
+                  child: SizedBox(width: 20, height: 20, child: item.image),
                 ),
               ),
             ),
@@ -79,7 +80,7 @@ class HowToPlayScreen extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.black,
+                      color: AppColors.white,
                     ),
                   ),
                   const SizedBox(height: 6),
@@ -87,7 +88,7 @@ class HowToPlayScreen extends StatelessWidget {
                     item.description,
                     style: const TextStyle(
                       fontSize: 13,
-                      color: AppColors.black,
+                      color: AppColors.white,
                     ),
                   ),
                 ],
@@ -101,16 +102,18 @@ class HowToPlayScreen extends StatelessWidget {
 
   Widget _proTipsCard() {
     return Container(
-      padding: const EdgeInsets.all(22),
+      // padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
         color: const Color(0xFF4A3AFF),
         borderRadius: BorderRadius.circular(16),
-          gradient: LinearGradient(colors: [
-            AppColors.tipsBackground1,
-            AppColors.tipsBackground2
-          ], begin: Alignment.topCenter,
-          end: Alignment.bottomCenter
-          )
+        gradient: LinearGradient(
+          colors: [
+            AppColors.howToPlayTipBackground1,
+            AppColors.howToPlayTipBackground2,
+          ],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
       ),
       child: Padding(
         padding: const EdgeInsets.all(40),
@@ -118,9 +121,8 @@ class HowToPlayScreen extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: AppColors.tipsBackground,
+                // color: AppColors.tipsBackground,
                 borderRadius: BorderRadius.circular(40),
-
               ),
               child: Padding(
                 padding: const EdgeInsets.all(14.0),

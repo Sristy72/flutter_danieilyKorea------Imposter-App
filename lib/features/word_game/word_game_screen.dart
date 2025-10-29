@@ -8,98 +8,149 @@ import 'package:get/get.dart';
 
 import '../../core/common/widgets/app_scaffold.dart';
 
-class WordGameScreen extends StatefulWidget {
+class WordGameScreen extends StatelessWidget {
   const WordGameScreen({super.key});
 
-  @override
-  State<WordGameScreen> createState() => _WordGameScreenState();
-}
-
-class _WordGameScreenState extends State<WordGameScreen> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Image.asset(AppImages.logWhite, height: 130, width: 130),
-                  ),
-
-                  SizedBox(height: 24),
-                  Text(
-                    'Word Game',
-                    style: TextStyle(color: Colors.white,fontSize: 24, fontWeight: FontWeight.w700),
-                  ),
-
-                  SizedBox(height: 8),
-                  Text(
-                    'A game with many hidden clues',
-                    style: TextStyle(color: Colors.white,fontSize: 18, fontWeight: FontWeight.w500),
-                  ),
-
-                  SizedBox(height: 110),
-                  Container(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Get.to(() => GameSettingsScreen());
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryButtonColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4), // Rounded corners
-                        ),
-                      ),
-                      child: Text(
-                        'Get Started',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                        ),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return Column(
+              children: [
+                // ────── TOP CONTENT (logo + texts) ──────
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Gap.bottomBarGap,
+                          Image.asset(
+                            AppImages.logWhite,
+                            height: 130,
+                            width: 130,
+                            fit: BoxFit.contain,
+                          ),
+                          const SizedBox(height: 24),
+                          Text(
+                            'Word Game',
+                            style: TextStyle(
+                              color: AppColors.votingBorder4,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            'A game with many hidden clues',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          // const SizedBox(height: 80),
+                        ],
                       ),
                     ),
                   ),
+                ),
 
-
-                  SizedBox(height: 12,),
-                  Container(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: () {Get.to(() => HowToPlayScreen());},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        side: const BorderSide(
-                          color: AppColors.primaryButtonBorderColor, // Border color
-                          width: 1,           // Border width
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4), // Rounded corners
-                        ),
-                      ),
-                      child: Text(
-                        'How to play',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ),
+                // ────── BOTTOM BUTTON SECTION ──────
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  decoration: const BoxDecoration(
+                    // optional: subtle background for the sticky area
+                    color: Colors.transparent,
                   ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // ── GET STARTED (GRADIENT) ──
+                      _gradientButton(
+                        onTap: () => Get.to(() => GameSettingsScreen()),
+                        label: 'Get Started',
+                      ),
+                      const SizedBox(height: 12),
 
-                  Gap.bottomBarGap
-                ],
-              ),
+                      // ── HOW TO PLAY (BORDERED) ──
+                      _borderedButton(
+                        onPressed: () => Get.to(() => const HowToPlayScreen()),
+                        label: 'How to play',
+                      ),
+
+                      // Gap.bottomBarGap, // your existing gap
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  // ────────────────── GRADIENT BUTTON ──────────────────
+  Widget _gradientButton({required VoidCallback onTap, required String label}) {
+    return SizedBox(
+      width: double.infinity,
+      height: 50,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(20),
+        onTap: onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF41194F), Color(0xFF271231)],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
             ),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            label,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ────────────────── BORDERED BUTTON ──────────────────
+  Widget _borderedButton({
+    required VoidCallback onPressed,
+    required String label,
+  }) {
+    return SizedBox(
+      width: double.infinity,
+      height: 50,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          side: const BorderSide(color: AppColors.border, width: 1),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        child: Text(
+          label,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),

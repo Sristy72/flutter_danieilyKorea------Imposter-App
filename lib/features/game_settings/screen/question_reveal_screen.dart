@@ -19,7 +19,7 @@ class QuestionRevealScreen extends StatefulWidget {
     required this.category,
     required this.question,
     required this.isImposter,
-    required this.answer
+    required this.answer,
   });
 
   @override
@@ -44,10 +44,9 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
     super.initState();
   }
 
-  _setValue(){
+  _setValue() {
     _answerTextEditingController.text = widget.answer ?? '';
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -68,16 +67,16 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                 text: TextSpan(
                   text: "The question for ",
                   style: const TextStyle(
-                    color: AppColors.white,
+                    color: AppColors.gray,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                   children: [
                     TextSpan(
-                      text: widget.playerName,
+                      text: "Player ${widget.playerName}",
                       style: const TextStyle(
-                        color: AppColors.primaryButtonColor,
-                        fontSize: 18,
+                        color: AppColors.white,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -88,13 +87,13 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
               Text(
                 "Category: ${widget.category}",
                 style: const TextStyle(
-                  fontSize: 14,
+                  fontSize: 32,
                   color: AppColors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 25),
-          
+
               /// TAP BOX
               GestureDetector(
                 onTap: () {
@@ -137,8 +136,8 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                           decoration: BoxDecoration(
                             color: AppColors.wordRevealBack1,
                             border: Border.all(
-                              width:2,
-                              color: AppColors.elevatedButton3
+                              width: 2,
+                              color: AppColors.elevatedButton3,
                             ),
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -164,9 +163,9 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                         ),
                 ),
               ),
-          
+
               const SizedBox(height: 14),
-          
+
               revealed
                   ? (widget.question == "Imposter"
                         ? Column(
@@ -187,7 +186,8 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Container(
                                           height: 20,
@@ -206,7 +206,7 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                                       ],
                                     ),
                                     const SizedBox(height: 8),
-          
+
                                     Text(
                                       'C R O W D',
                                       style: TextStyle(
@@ -214,7 +214,7 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                                         fontSize: 20,
                                       ),
                                     ),
-          
+
                                     const Text(
                                       "Use this in this round to blend in!",
                                       style: TextStyle(
@@ -226,17 +226,19 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                                   ],
                                 ),
                               ),
-          
+
                               const SizedBox(height: 269),
-          
+
                               /// Got it Button below clue
                               Container(
                                 width: double.infinity,
                                 height: 50,
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    final answer = _answerTextEditingController.text.trim();
-          
+                                    final answer = _answerTextEditingController
+                                        .text
+                                        .trim();
+
                                     if (answer.isEmpty) {
                                       Get.snackbar(
                                         "Error",
@@ -244,21 +246,22 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                                       );
                                       return;
                                     }
-          
+
                                     final gameController =
                                         Get.find<GameController>();
                                     gameController.saveAnswer(
                                       widget.playerName,
                                       answer,
                                     );
-          
+
                                     Get.back();
                                   },
                                   style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(4),
                                     ),
-                                    backgroundColor: AppColors.primaryButtonColor,
+                                    backgroundColor:
+                                        AppColors.primaryButtonColor,
                                   ),
                                   child: const Text(
                                     'Submit Answer',
@@ -284,7 +287,7 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                                     ),
                                     borderRadius: BorderRadius.circular(4),
                                   ),
-          
+
                                   child: TextField(
                                     style: const TextStyle(color: Colors.white),
                                     controller: _answerTextEditingController,
@@ -292,7 +295,7 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                                     maxLines: 8,
                                     minLines: 5,
                                     decoration: InputDecoration(
-                                      hintText:  'Type your answer here...',
+                                      hintText: 'Type your answer here...',
                                       hintStyle: TextStyle(
                                         color: AppColors.hintStyle,
                                       ),
@@ -301,18 +304,18 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                                     ),
                                   ),
                                 ),
-          
+
                                 SizedBox(height: 202),
-          
+
                                 Container(
                                   width: double.infinity,
                                   height: 50,
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      final answer = _answerTextEditingController
-                                          .text
-                                          .trim();
-          
+                                      final answer =
+                                          _answerTextEditingController.text
+                                              .trim();
+
                                       if (answer.isEmpty) {
                                         Get.snackbar(
                                           "Error",
@@ -320,22 +323,23 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                                         );
                                         return;
                                       }
-          
+
                                       final gameController =
                                           Get.find<GameController>();
                                       gameController.saveAnswer(
                                         widget.playerName,
                                         answer,
                                       );
-          
+
                                       Get.back();
                                     },
-          
+
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(4),
                                       ),
-                                      backgroundColor: AppColors.primaryButtonColor,
+                                      backgroundColor:
+                                          AppColors.primaryButtonColor,
                                     ),
                                     child: const Text(
                                       'Submit Answer',
@@ -347,9 +351,9 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                                     ),
                                   ),
                                 ),
-          
+
                                 SizedBox(height: 26),
-          
+
                                 Text(
                                   "$submittedCount / $totalPlayers answers submitted",
                                   style: const TextStyle(
@@ -359,7 +363,7 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                                   ),
                                 ),
 
-                                Gap.bottomBarGap
+                                Gap.bottomBarGap,
                               ],
                             ),
                           ))
@@ -367,7 +371,7 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const SizedBox(height: 420),
-          
+
                         Text(
                           "$submittedCount / $totalPlayers answers submitted",
                           style: const TextStyle(
@@ -376,7 +380,7 @@ class _QuestionRevealScreenState extends State<QuestionRevealScreen> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        Gap.bottomBarGap
+                        Gap.bottomBarGap,
                       ],
                     ),
             ],
