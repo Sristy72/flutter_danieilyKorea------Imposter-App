@@ -86,6 +86,9 @@ class GameController extends BaseController {
           Get.delete<RevealedWordController>();
         }
 
+        // Create controller ONCE, before navigation
+        Get.put(RevealedWordController(success.data));
+
         // Navigate to PlayersScreen
         Get.to(() => PlayersScreen(data: success.data));
       },
