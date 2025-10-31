@@ -33,7 +33,6 @@ class GameController extends BaseController {
     }
   }
 
-
   // Update players from AddPlayerScreen
   void updatePlayers(List<String> players) {
     playerNames.assignAll(players);
@@ -53,7 +52,6 @@ class GameController extends BaseController {
     }
   }
 
-
   // Game start function
   Future<void> gameStart({
     required List<String> playerNames,
@@ -68,12 +66,12 @@ class GameController extends BaseController {
     final result = await _gameRepo.gameStart(request);
 
     result.fold(
-          (fail) {
+      (fail) {
         setError(fail.message);
         DPrint.log("Register failed: ${fail.message}");
         setLoading(false);
       },
-          (success) {
+      (success) {
         // Reset old data
         players.clear();
 

@@ -116,43 +116,46 @@ class DiscussionPhaseScreen2 extends StatelessWidget {
                             children: [
                               player.isImposter
                                   ? Row(
-                                children: [
-                                  Text(
-                                    player.name,
-                                    style: TextStyle(
-                                      fontSize: 19,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppColors.imposterSerial,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                      BorderRadius.circular(20),
-                                      color: AppColors.imposterSerialBack,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 3, horizontal: 8),
-                                      child: Text(
-                                        'Imposter',
-                                        style: TextStyle(
-                                            color:
-                                            AppColors.imposterSerial),
+                                      children: [
+                                        Text(
+                                          player.name,
+                                          style: TextStyle(
+                                            fontSize: 19,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppColors.imposterSerial,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              20,
+                                            ),
+                                            color: AppColors.imposterSerialBack,
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              vertical: 3,
+                                              horizontal: 8,
+                                            ),
+                                            child: Text(
+                                              'Imposter',
+                                              style: TextStyle(
+                                                color: AppColors.imposterSerial,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  : Text(
+                                      player.name,
+                                      style: const TextStyle(
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white,
                                       ),
                                     ),
-                                  ),
-                                ],
-                              )
-                                  : Text(
-                                player.name,
-                                style: const TextStyle(
-                                  fontSize: 19,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white,
-                                ),
-                              ),
 
                               const SizedBox(height: 8),
 
@@ -214,17 +217,31 @@ class DiscussionPhaseScreen2 extends StatelessWidget {
                     Get.offAll(() => GameSettingsScreen());
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryButtonColor,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4),
+                      borderRadius: BorderRadius.circular(8),
                     ),
+                    padding: EdgeInsets.zero,
+                    backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    disabledBackgroundColor: Colors.transparent,
                   ),
-                  child: const Text(
-                    "Play Again",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFF41194F), Color(0xFF271231)],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    alignment: Alignment.center,
+                    child: const Text(
+                      "Play Again",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),

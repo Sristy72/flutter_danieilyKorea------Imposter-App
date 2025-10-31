@@ -69,7 +69,7 @@ class _WordRevealScreenState extends State<WordRevealScreen> {
                 ),
               ),
               const SizedBox(height: 25),
-          
+
               /// TAP BOX
               GestureDetector(
                 onTap: () {
@@ -94,7 +94,9 @@ class _WordRevealScreenState extends State<WordRevealScreen> {
                           decoration: BoxDecoration(
                             color: AppColors.wordRevealBack,
                             borderRadius: BorderRadius.circular(4),
-                            border: widget.word == 'Imposter' ? Border.all(color: AppColors.red, width: 3) : null
+                            border: widget.word == 'Imposter'
+                                ? Border.all(color: AppColors.red, width: 3)
+                                : null,
                           ),
                           child: Center(
                             child: Text(
@@ -102,7 +104,9 @@ class _WordRevealScreenState extends State<WordRevealScreen> {
                               style: TextStyle(
                                 fontSize: 26,
                                 fontWeight: FontWeight.bold,
-                                color: widget.word == 'Imposter' ? AppColors.red1 : AppColors.proBackground,
+                                color: widget.word == 'Imposter'
+                                    ? AppColors.red1
+                                    : AppColors.proBackground,
                               ),
                             ),
                           ),
@@ -112,7 +116,8 @@ class _WordRevealScreenState extends State<WordRevealScreen> {
                           width: double.infinity,
                           decoration: BoxDecoration(
                             border: Border.all(
-                              width:1, color: AppColors.imageBorder
+                              width: 1,
+                              color: AppColors.imageBorder,
                             ),
                             // color: Colors.black,
                             image: const DecorationImage(
@@ -126,133 +131,168 @@ class _WordRevealScreenState extends State<WordRevealScreen> {
                         ),
                 ),
               ),
-          
+
               const SizedBox(height: 14),
-          
+
               revealed
                   ? (widget.word == "Imposter"
-                  ? Column(
-                children: [
-                  ///Clue Container
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(25),
-                    decoration: BoxDecoration(
-                      color: AppColors.wordRevealBack,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: AppColors.imageBorder1, width: 1.5),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(height: 20, width: 20, child: Image.asset(AppImages.proTips)),
-                            SizedBox(width: 6,),
-                            const Text(
-                              "Your Clue",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
+                        ? Column(
+                            children: [
+                              ///Clue Container
+                              Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(25),
+                                decoration: BoxDecoration(
+                                  color: AppColors.wordRevealBack,
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                    color: AppColors.imageBorder1,
+                                    width: 1.5,
+                                  ),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          height: 20,
+                                          width: 20,
+                                          child: Image.asset(AppImages.proTips),
+                                        ),
+                                        SizedBox(width: 6),
+                                        const Text(
+                                          "Your Clue",
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 8),
+
+                                    Text(
+                                      'C R O W D',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+
+                                    const Text(
+                                      "Use this in this round to blend in!",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.white,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+
+                              const SizedBox(height: 269),
+
+                              /// Got it Button below clue
+                              Container(
+                                width: double.infinity,
+                                height: 50,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    padding: EdgeInsets.zero,
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent,
+                                    disabledBackgroundColor: Colors.transparent,
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      gradient: const LinearGradient(
+                                        colors: [
+                                          Color(0xFF41194F),
+                                          Color(0xFF271231),
+                                        ],
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight,
+                                      ),
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: const Text(
+                                      'Got it!',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+
+                              Gap.bottomBarGap,
+                            ],
+                          )
+                        : Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 30.0),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 50,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      backgroundColor:
+                                          AppColors.primaryButtonColor,
+                                    ),
+                                    child: const Text(
+                                      'Got it!',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Gap.bottomBarGap,
+                            ],
+                          ))
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 20,
+                          width: 20,
+                          child: Image.asset(AppImages.tapHere),
                         ),
-                        const SizedBox(height: 8),
-          
-                        Text('C R O W D', style: TextStyle(color: Colors.white, fontSize: 20),),
-          
-                        const Text(
-                          "Use this in this round to blend in!",
+                        const SizedBox(width: 10),
+                        Text(
+                          "Tap the box to reveal",
                           style: TextStyle(
                             fontSize: 14,
-                            color: Colors.white,
+                            color: AppColors.primaryButtonColor,
+                            fontWeight: FontWeight.w500,
                           ),
-                          textAlign: TextAlign.center,
                         ),
                       ],
                     ),
-                  ),
-          
-                  const SizedBox(height: 269),
-          
-                  /// Got it Button below clue
-                  Container(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: () {Get.back();},
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        backgroundColor: AppColors.primaryButtonColor,
-                      ),
-                      child: const Text(
-                        'Got it!',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  Gap.bottomBarGap
-                ],
-              )
-                  : Column(
-                    children: [
-                      Padding(
-                                      padding: const EdgeInsets.only(top: 30.0),
-                                      child: Container(
-                      width: double.infinity,
-                      height: 50,
-                      child: ElevatedButton(
-                        onPressed: () {Get.back();},
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          backgroundColor: AppColors.primaryButtonColor,
-                        ),
-                        child: const Text(
-                          'Got it!',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                                      ),
-                                    ),
-                      Gap.bottomBarGap
-                    ],
-                  ))
-                  : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 20,
-                    width: 20,
-                    child: Image.asset(AppImages.tapHere),
-                  ),
-                  const SizedBox(width: 10),
-                  Text(
-                    "Tap the box to reveal",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: AppColors.primaryButtonColor,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-          
             ],
           ),
         ),

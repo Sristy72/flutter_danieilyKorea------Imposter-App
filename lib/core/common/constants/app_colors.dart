@@ -97,6 +97,6 @@ class AppColors {
   static const Color gameSettingDiselectBorder = Color(0xFF1E1837);
 
 
-  static const Color playerContainerBg = Color(0xFF0F1427);
-  static const Color playerIconBg = Color(0xFF2C1C49);
+  static Color playerContainerBg = Color(0xFF0F1427);
+  static Color playerIconBg = Color(0xFF2C1C49);
 }

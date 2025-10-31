@@ -161,9 +161,7 @@ class GameSettingsScreen extends StatelessWidget {
                       ],
                     ),
 
-                    const SizedBox(
-                      height: 80,
-                    ), // extra space before sticky button
+                    const SizedBox(height: 80),
                   ],
                 ),
               ),
@@ -175,36 +173,50 @@ class GameSettingsScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
               child: SizedBox(
                 height: 50,
-                child: ElevatedButton(
-                  onPressed: _submit,
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    padding: EdgeInsets.zero,
-                    backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                  ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [Color(0xFF41194F), Color(0xFF271231)],
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
+                child: Obx(() {
+                  final bool isLoading = controller.isLoading.value;
+
+                  return ElevatedButton(
+                    onPressed: isLoading ? null : _submit,
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
                       ),
-                      borderRadius: BorderRadius.circular(20),
+                      padding: EdgeInsets.zero,
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      disabledBackgroundColor: Colors.transparent,
                     ),
-                    alignment: Alignment.center,
-                    child: const Text(
-                      'Start Game',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFF41194F), Color(0xFF271231)],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
                       ),
+                      alignment: Alignment.center,
+                      child: isLoading
+                          ? const SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2,
+                              ),
+                            )
+                          : const Text(
+                              'Start Game',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                     ),
-                  ),
-                ),
+                  );
+                }),
               ),
             ),
           ],

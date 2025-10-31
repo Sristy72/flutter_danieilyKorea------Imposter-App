@@ -26,7 +26,10 @@ class _EveryonesAnswerScreenState extends State<EveryonesAnswerScreen> {
   Widget build(BuildContext context) {
     return AppScaffold(
       appBar: AppBar(
-        title: Text('Everyone’s Answers', style: TextStyle(color: Colors.white),),
+        title: Text(
+          'Everyone’s Answers',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: SafeArea(
         child: Center(
@@ -82,26 +85,45 @@ class _EveryonesAnswerScreenState extends State<EveryonesAnswerScreen> {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
-                      Get.to(() => DiscussionPhaseScreen(players: widget.players, question: widget.question));
+                      Get.to(
+                        () => DiscussionPhaseScreen(
+                          players: widget.players,
+                          question: widget.question,
+                        ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primaryButtonColor,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(8),
                       ),
+                      padding: EdgeInsets.zero,
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      disabledBackgroundColor: Colors.transparent,
                     ),
-                    child: Text(
-                      'Start Round',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18,
-                        color: Colors.white,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFF41194F), Color(0xFF271231)],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Start Round',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
                 ),
 
-                Gap.bottomBarGap
+                Gap.bottomBarGap,
               ],
             ),
           ),

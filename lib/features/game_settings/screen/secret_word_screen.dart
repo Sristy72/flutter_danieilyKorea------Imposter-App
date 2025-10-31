@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../controller/game_controller.dart';
 import '../data/models/game_start_response_model.dart';
+import '../services/animation_service.dart';
 
 class SecretWordScreen extends StatelessWidget {
   final List<Player> players;
@@ -13,9 +14,10 @@ class SecretWordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final imposter = players.firstWhere((p) => p.isImposter == true);
-    final secretWord = players.firstWhere((p) => p.isImposter == false).wordAssigned;
+    final secretWord = players
+        .firstWhere((p) => p.isImposter == false)
+        .wordAssigned;
 
     return Scaffold(
       body: Container(
@@ -25,7 +27,6 @@ class SecretWordScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-
               Center(
                 child: Text(
                   'THE IMPOSTER WAS',
@@ -38,14 +39,26 @@ class SecretWordScreen extends StatelessWidget {
               ),
               const SizedBox(height: 12),
 
+              // Center(
+              //   child: Text(
+              //     "Player ${imposter.name}",
+              //     style: const TextStyle(
+              //       fontSize: 28,
+              //       fontWeight: FontWeight.bold,
+              //       color: AppColors.proBackground,
+              //     ),
+              //   ),
+              // ),
               Center(
-                child: Text(
-                  imposter.name, //Imposter Name
+                child: AnimatedTextReveal(
+                  text: "Player ${imposter.name}",
                   style: const TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: AppColors.proBackground,
                   ),
+                  totalDuration: const Duration(milliseconds: 1600),
+                  letterDelay: const Duration(milliseconds: 80),
                 ),
               ),
 
@@ -78,19 +91,39 @@ class SecretWordScreen extends StatelessWidget {
                   height: 50,
                   width: double.infinity,
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primaryButtonColor,
-                      shape:RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
-                  ),),
                     onPressed: () {
                       final gameController = Get.find<GameController>();
                       gameController.resetGame(); // reset variables
                       Get.offAll(() => GameSettingsScreen());
                     },
-                    child: const Text('Play Again', style: TextStyle(
-                      fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white
-                    ),),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding: EdgeInsets.zero,
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      disabledBackgroundColor: Colors.transparent,
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFF340101), Color(0xFF4F0000)],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'Play Again',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),

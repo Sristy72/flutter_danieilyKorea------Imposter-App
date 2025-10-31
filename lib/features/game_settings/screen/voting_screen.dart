@@ -11,7 +11,7 @@ import '../data/models/game_start_response_model.dart';
 class VotingPhaseScreen extends StatelessWidget {
   final List<Player> players;
 
-  const VotingPhaseScreen( this.players,{super.key,});
+  const VotingPhaseScreen(this.players, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,21 +30,25 @@ class VotingPhaseScreen extends StatelessWidget {
                   color: AppColors.white,
                 ),
               ),
-          
+
               /// Header
               const Text(
                 "Time to discuss and vote for the imposter!",
                 style: TextStyle(fontSize: 14, color: Colors.white),
               ),
               const SizedBox(height: 20),
-          
+
               /// Section title
               const Text(
                 "How to vote",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
               const SizedBox(height: 16),
-          
+
               /// PHASE CARDS
               _phaseCard(
                 images: AppImages.person,
@@ -53,7 +57,7 @@ class VotingPhaseScreen extends StatelessWidget {
                 color1: AppColors.votingBackground,
                 color2: AppColors.votingBorder1,
                 color3: AppColors.votingNotificationBack,
-                color4: AppColors.votingImageback1
+                color4: AppColors.votingImageback1,
               ),
               const SizedBox(height: 12),
               _phaseCard(
@@ -63,7 +67,7 @@ class VotingPhaseScreen extends StatelessWidget {
                 color1: AppColors.votingBackground,
                 color2: AppColors.votingBorder4,
                 color3: AppColors.votingBorder4,
-                  color4: AppColors.votingImageback2
+                color4: AppColors.votingImageback2,
               ),
               const SizedBox(height: 12),
               _phaseCard(
@@ -74,7 +78,7 @@ class VotingPhaseScreen extends StatelessWidget {
                 color1: AppColors.votingBackground,
                 color2: AppColors.votingBorder2,
                 color3: AppColors.votingBorder2,
-                color4: AppColors.votingImageback3
+                color4: AppColors.votingImageback3,
               ),
               const SizedBox(height: 12),
               _phaseCard(
@@ -85,17 +89,17 @@ class VotingPhaseScreen extends StatelessWidget {
                 color1: AppColors.votingBackground,
                 color2: AppColors.votingBorder3,
                 color3: AppColors.votingBorder3,
-                color4: AppColors.votingImageback4
+                color4: AppColors.votingImageback4,
               ),
-          
-              SizedBox(height: 40,),
-          
+
+              SizedBox(height: 40),
+
               /// REVEAL RESULTS BUTTON
               SizedBox(
+                height: 50,
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-        
                     // Get.snackbar(
                     //   "Voting Complete",
                     //   "Revealing results...",
@@ -105,24 +109,37 @@ class VotingPhaseScreen extends StatelessWidget {
                     Get.to(() => SecretWordScreen(players));
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.revealButton,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    padding: EdgeInsets.zero,
+                    backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    disabledBackgroundColor: Colors.transparent,
                   ),
-                  child: const Text(
-                    "Reveal Results",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFF340101), Color(0xFF4F0000)],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    alignment: Alignment.center,
+                    child: const Text(
+                      "Reveal Results",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
               ),
-        
-              Gap.bottomBarGap
+
+              Gap.bottomBarGap,
             ],
           ),
         ),
@@ -149,7 +166,12 @@ class VotingPhaseScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(4),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(top: 18.0, left: 8, right: 8, bottom: 18),
+        padding: const EdgeInsets.only(
+          top: 18.0,
+          left: 8,
+          right: 8,
+          bottom: 18,
+        ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -166,20 +188,28 @@ class VotingPhaseScreen extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Center(child: Container(height:35, width: 35, child: Image.asset(images))),
-                    ),
-                    Positioned(right: 0, top: -2,
+                      child: Center(
                         child: Container(
-                            decoration: BoxDecoration(
-                              color: color3,
-                              shape: BoxShape.circle,
-
-                            ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Text('2'),
+                          height: 35,
+                          width: 35,
+                          child: Image.asset(images),
+                        ),
                       ),
-                    ))
+                    ),
+                    Positioned(
+                      right: 0,
+                      top: -2,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: color3,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text('2'),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
