@@ -255,17 +255,34 @@ class _WordRevealScreenState extends State<WordRevealScreen> {
                                     },
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(4),
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
-                                      backgroundColor:
-                                          AppColors.primaryButtonColor,
+                                      padding: EdgeInsets.zero,
+                                      backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
+                                      disabledBackgroundColor:
+                                          Colors.transparent,
                                     ),
-                                    child: const Text(
-                                      'Got it!',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        gradient: const LinearGradient(
+                                          colors: [
+                                            Color(0xFF41194F),
+                                            Color(0xFF271231),
+                                          ],
+                                          begin: Alignment.centerLeft,
+                                          end: Alignment.centerRight,
+                                        ),
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      alignment: Alignment.center,
+                                      child: const Text(
+                                        'Got it!',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ),
