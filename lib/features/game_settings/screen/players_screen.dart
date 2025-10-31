@@ -22,7 +22,7 @@ class PlayersScreen extends StatelessWidget {
     // }
 
     // Create a fresh controller for new game
-    final controller = Get.put(RevealedWordController(data));
+    final controller = Get.find<RevealedWordController>();
     final GameController gameController = Get.find<GameController>();
 
     return Scaffold(
@@ -50,43 +50,60 @@ class PlayersScreen extends StatelessWidget {
               const SizedBox(height: 20),
 
               Expanded(
-                child: GridView.builder(
-                  itemCount: data.players.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 12,
-                    mainAxisSpacing: 12,
-                    childAspectRatio: 1.15,
-                  ),
-                  itemBuilder: (context, index) {
-                    final player = data.players[index];
-                    return GestureDetector(
-                      onTap: () async {
-                        if (gameController.gameType == "word") {
-                          await Get.to(
-                            () => WordRevealScreen(
-                              playerName: player.name,
-                              category: player.wordCategory,
-                              word: player.wordAssigned,
-                            ),
-                          );
-                        } else if (gameController.gameType == "question") {
-                          await Get.to(
-                            () => QuestionRevealScreen(
-                              playerName: player.name,
-                              category: player.wordCategory,
-                              question: player.questions,
-                              isImposter: player.isImposter,
-                              answer: player.answer,
-                            ),
-                          );
-                        }
-                        controller.markRevealed(player.id);
-                      },
-                      child: _playerCard(player.name, index),
-                    );
-                  },
-                ),
+                child: Obx(() {
+                  // This is the magic line
+                  controller.revealed.length;
+
+                  return GridView.builder(
+                    itemCount: data.players.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                          childAspectRatio: 1.15,
+                        ),
+                    itemBuilder: (context, index) {
+                      final player = data.players[index];
+                      final isRevealed = controller.revealed.contains(
+                        player.id,
+                      );
+
+                      return GestureDetector(
+                        onTap: isRevealed
+                            ? null
+                            : () async {
+                                if (gameController.gameType == "word") {
+                                  await Get.to(
+                                    () => WordRevealScreen(
+                                      playerName: player.name,
+                                      category: player.wordCategory,
+                                      word: player.wordAssigned,
+                                    ),
+                                  );
+                                } else if (gameController.gameType ==
+                                    "question") {
+                                  await Get.to(
+                                    () => QuestionRevealScreen(
+                                      playerName: player.name,
+                                      category: player.wordCategory,
+                                      question: player.questions,
+                                      isImposter: player.isImposter,
+                                      answer: player.answer,
+                                    ),
+                                  );
+                                }
+                                controller.markRevealed(player.id);
+                              },
+                        child: _playerCard(
+                          name: player.name,
+                          index: index,
+                          isRevealed: isRevealed,
+                        ),
+                      );
+                    },
+                  );
+                }),
               ),
             ],
           ),
@@ -95,13 +112,21 @@ class PlayersScreen extends StatelessWidget {
     );
   }
 
-  Widget _playerCard(String name, int index) {
+  Widget _playerCard({
+    required String name,
+    required int index,
+    required bool isRevealed,
+  }) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.votingBackground,
+        color: isRevealed
+            ? AppColors.votingBackground.withOpacity(0.5)
+            : AppColors.votingBackground,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
-          color: AppColors.primaryButtonBorderColor,
+          color: isRevealed
+              ? const Color.fromARGB(255, 50, 57, 102)
+              : AppColors.primaryButtonBorderColor,
           width: 1.5,
         ),
       ),
@@ -111,13 +136,18 @@ class PlayersScreen extends StatelessWidget {
           Container(
             width: 65,
             height: 65,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               shape: BoxShape.circle,
               gradient: LinearGradient(
-                colors: [
-                  AppColors.primaryButtonBorderColor,
-                  AppColors.primaryButtonColor,
-                ],
+                colors: isRevealed
+                    ? [
+                        const Color.fromARGB(255, 50, 57, 102),
+                        const Color.fromARGB(255, 52, 23, 83),
+                      ]
+                    : [
+                        AppColors.primaryButtonBorderColor,
+                        AppColors.primaryButtonColor,
+                      ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
@@ -125,9 +155,9 @@ class PlayersScreen extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               "P",
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 30,
-                color: Colors.white,
+                color: isRevealed ? Colors.white70 : Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -135,10 +165,10 @@ class PlayersScreen extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             "Player ${index + 1}",
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w600,
-              color: AppColors.background,
+              color: isRevealed ? Colors.grey : AppColors.background,
             ),
           ),
         ],
